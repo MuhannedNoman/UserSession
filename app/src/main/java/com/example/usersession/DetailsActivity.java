@@ -15,8 +15,8 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details);
-        TextView result = (TextView)findViewById(R.id.resultView);
-        Button btnLogOut = (Button)findViewById(R.id.btnLogOut);
+        TextView result = findViewById(R.id.resultView);
+        Button btnLogOut = findViewById(R.id.btnLogOut);
         prf = getSharedPreferences("user_details",MODE_PRIVATE);
         intent = new Intent(DetailsActivity.this,MainActivity.class);
         result.setText("Hello, "+prf.getString("username",null));
@@ -25,7 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences.Editor editor = prf.edit();
                 editor.clear();
-                editor.commit();
+                editor.apply();
                 startActivity(intent);
             }
         });

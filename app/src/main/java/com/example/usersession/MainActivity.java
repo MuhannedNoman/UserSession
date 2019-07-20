@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText uname, pwd;
+    EditText userName, pwd;
     Button loginBtn;
     SharedPreferences pref;
     Intent intent;
@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        uname = (EditText)findViewById(R.id.txtName);
-        pwd = (EditText)findViewById(R.id.txtPwd);
-        loginBtn = (Button)findViewById(R.id.btnLogin);
+        userName = findViewById(R.id.txtName);
+        pwd = findViewById(R.id.txtPwd);
+        loginBtn = findViewById(R.id.btnLogin);
         pref = getSharedPreferences("user_details",MODE_PRIVATE);
         intent = new Intent(MainActivity.this,DetailsActivity.class);
         if(pref.contains("username") && pref.contains("password")){
@@ -30,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = uname.getText().toString();
+                String username = userName.getText().toString();
                 String password = pwd.getText().toString();
                 if(username.equals("asd") && password.equals("asd")){
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("username",username);
                     editor.putString("password",password);
-                    editor.commit();
+                    editor.apply();
                     Toast.makeText(getApplicationContext(), "Login Successful",Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
